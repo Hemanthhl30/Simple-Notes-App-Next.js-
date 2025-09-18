@@ -3,9 +3,9 @@ import RemoveButton from "./RemoveButton";
 import EditButton from "./EditButton";
 
 const getTopics = async () => {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"; 
   try {
-    // Use relative path so it works locally & on Vercel
-    const res = await fetch("/api/topics", {
+    const res = await fetch(`${apiUrl}/api/topics`, {
       cache: "no-store",
     });
 
@@ -15,10 +15,10 @@ const getTopics = async () => {
 
     const data = await res.json(); // { topics: [...] }
     console.log("API DATA:", data);
-    return data;
+    return data; 
   } catch (error) {
     console.error("Error fetching topics: ", error);
-    return { topics: [] };
+    return { topics: [] }; 
   }
 };
 
@@ -49,4 +49,5 @@ export default async function TopicList() {
     </>
   );
 }
+
 
